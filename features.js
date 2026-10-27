@@ -89,7 +89,7 @@
     });
     const toggle = document.getElementById("menuToggle");
     const nav = document.getElementById("nav");
-    if (toggle && nav && !toggle.dataset.menuReady) {
+    if (document.body.classList.contains("dashboard-page") && toggle && nav && !toggle.dataset.menuReady) {
       toggle.dataset.menuReady = "true";
       toggle.addEventListener("click", function () {
         const open = nav.classList.toggle("open");

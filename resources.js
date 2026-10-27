@@ -97,6 +97,16 @@
       const appSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js");
       const aiSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-ai.js");
       const app = appSdk.getApps().length ? appSdk.getApp() : appSdk.initializeApp(cfg.firebaseConfig);
+      if (!cfg.recaptchaEnterpriseSiteKey) {
+        throw new Error("App Check setup is incomplete: the reCAPTCHA Enterprise SITE KEY has not been added to firebase-config.js yet.");
+      }
+      const appCheckSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app-check.js");
+      if (!appCheckSdk.getAppCheck(app)) {
+        appCheckSdk.initializeAppCheck(app, {
+          provider: new appCheckSdk.ReCaptchaEnterpriseProvider(cfg.recaptchaEnterpriseSiteKey),
+          isTokenAutoRefreshEnabled: true
+        });
+      }
       const ai = aiSdk.getAI(app, {backend: new aiSdk.GoogleAIBackend()});
       const model = aiSdk.getGenerativeModel(ai, {model:"gemini-3.5-flash-lite"});
       const prompt = `You are Edunime, an accurate educational tutor. Create original, topic-specific study material for this learner. Context: ${JSON.stringify(context)}. Exact topic: "${subject}". Tailor content to the selected curriculum and level; if exact syllabus details are uncertain, clearly flag that and teach the core subject accurately rather than inventing syllabus claims. Return ONLY valid JSON with this schema: {"title":"...","intro":"...","notes":[{"heading":"...","body":"Detailed explanation with examples; use plain text and newline for equations"}],"keyPoints":["..."],"flashcards":[{"q":"...","a":"..."}],"quiz":[{"q":"...","options":["A ...","B ...","C ...","D ..."],"answer":"exact option text","explanation":"..."}],"studyTips":["..."]}. Provide 6-10 substantial notes, 6-10 key points, 6-10 flashcards and 5 multiple-choice questions with correct answers and explanations. Include formulas and worked examples when appropriate; for non-mathematical topics use relevant concepts, timelines, processes, evidence or examples. Avoid generic filler. Do not claim to quote textbooks. `;

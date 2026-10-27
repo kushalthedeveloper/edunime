@@ -46,38 +46,40 @@
     const depth = data.get("depth");
     if (!subject) return;
     const identity = [board !== "Not applicable" ? board : "", classLevel, stream !== "General" ? stream : "", subject].filter(Boolean).join(" ");
-    const detailed = depth === "simple" ? "beginner friendly step by step explanation" : depth === "advanced" ? "advanced rigorous explanation research references" : depth === "exam" ? "exam focused revision important questions previous year questions" : "detailed chapter notes concepts definitions worked examples diagrams common mistakes";
-    const boardQuery = board !== "Not applicable" ? board : "";
-    const examQuery = exam ? exam + " official syllabus latest notification" : "";
-    const syllabusSearch = searchUrl([boardQuery, classLevel, subject, "official syllabus current academic year"].filter(Boolean).join(" "));
-    const handwrittenSearch = searchUrl([identity, "handwritten notes PDF"].filter(Boolean).join(" "));
-    const noteSearch = searchUrl([identity, detailed, "study notes"].filter(Boolean).join(" "));
-    const animationSearch = videoUrl([identity, "animated explanation visual lesson"].filter(Boolean).join(" "));
-    const lessonSearch = videoUrl([identity, "full chapter explanation"].filter(Boolean).join(" "));
-    const practiceSearch = searchUrl([identity, "practice questions solved examples worksheet"].filter(Boolean).join(" "));
     const source = official[board] || null;
-    const generalOfficial = source && source.url ? card("✓", source.name, "Start with this official portal. Confirm the exact class, subject and current academic-year document there.", source.url, "Open official portal") : card("✓", "Find the official syllabus", "Search for the current syllabus from your selected board, university or awarding authority. Verify the year and document before studying.", syllabusSearch, "Search syllabus");
-    let html = '<div class="resource-result-head"><div><div class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> YOUR RESOURCE SHORTLIST</div><h2>' + esc(subject) + '</h2><p>' + esc([classLevel, board, stream, exam].filter(Boolean).join(" · ")) + '</p></div></div><div class="resource-card-grid">';
-    html += generalOfficial;
-    html += card("✎", "Detailed chapter notes", "Find structured explanations, key definitions, formulas, solved examples and revision points. Check the source quality and syllabus match.", noteSearch, "Search detailed notes");
-    html += card("📝", "Handwritten notes & PDFs", "Search for publicly available handwritten notes and PDFs. Respect copyright, creator terms and any access restrictions.", handwrittenSearch, "Find handwritten notes");
-    html += card("▶", "Animation & visual videos", "Find animations and visual explainers for concepts that are easier to understand by watching them unfold.", animationSearch, "Find animated videos", lessonSearch, "Full chapter videos");
-    html += card("◎", "Practice & solved examples", "Build understanding with worksheets, worked examples and practice questions matched to your topic.", practiceSearch, "Find practice questions");
-    html += card("▣", "Textbook and learning material", "Look for official textbooks, open educational material and chapter PDFs where available.", searchUrl([boardQuery, classLevel, subject, "official textbook chapter PDF"].filter(Boolean).join(" ")), "Find textbooks");
-    if (exam) {
-      const urls = examSources[exam] || [];
-      html += card("★", "Competitive exam syllabus & notices", "Use the exam authority's official site for dates, eligibility, syllabus, application notices and updates. Dates can change.", urls[0] || searchUrl(examQuery), urls.length ? "Open official authority" : "Search official notices", urls[1] || searchUrl(examQuery), urls.length > 1 ? "Second official site" : "Search latest updates");
-      html += card("◷", "Exam-focused revision", "Search for topic-wise preparation, previous-year questions and revision plans. Check that material matches the current exam pattern.", searchUrl(exam + " " + subject + " topic wise previous year questions current syllabus"), "Find exam practice");
-    } else {
-      html += card("◷", "Syllabus and exam updates", "Search for current official notifications for the selected curriculum. Always confirm changes on the issuing authority's own site.", syllabusSearch, "Check current syllabus", searchUrl([boardQuery, classLevel, "official exam circular syllabus changes current year"].filter(Boolean).join(" ")), "Search official notices");
-    }
+    const prompt = "Act as a careful subject tutor. Create original study notes for: " + identity + (exam ? "; competitive exam: " + exam : "") + ". Explanation level: " + depth + ". Include learning objectives, key terms, clear explanations, worked examples, common mistakes, a revision summary and practice questions with explained answers. Match the current official syllabus where possible. Do not invent syllabus facts, exam dates, citations or source links; clearly identify anything that needs verification.";
+    const officialCard = source && source.url
+      ? '<article class="resource-card"><span class="resource-card-icon">✓</span><h3>' + esc(source.name) + '</h3><p>Official source for checking curriculum documents. This is the only card that opens an external website.</p><a href="' + esc(source.url) + '" target="_blank" rel="noopener noreferrer">Open official portal ↗</a></article>'
+      : '<article class="resource-card"><span class="resource-card-icon">✓</span><h3>Official syllabus</h3><p>Check your board, university or exam authority's official website for the current syllabus. Official documents may be hosted outside Edunime.</p></article>';
+    const keyTerms = subject.split(/[—–,:;]/).map(x => x.trim()).filter(Boolean).slice(0, 5);
+    const topicWords = subject.split(/\s+/).filter(Boolean).slice(0, 5);
+    const questions = [
+      "Explain the main idea of " + subject + " in your own words.",
+      "List three important terms or facts related to " + subject + " and define them.",
+      "Give one worked example or real-world application of " + subject + ".",
+      "What is a common mistake learners make with " + subject + ", and how can it be avoided?",
+      "Write a short exam-style answer about " + subject + " and check it against your textbook."
+    ];
+    const checklist = [
+      "Write what I already know about " + subject + ".",
+      "Read the matching section in my prescribed textbook or class notes.",
+      "Make a list of key definitions, formulas or dates, as relevant.",
+      "Work through one example without looking at the answer.",
+      "Answer the practice questions below from memory.",
+      "Review mistakes and revisit anything I could not explain."
+    ];
+    let html = '<div class="resource-result-head"><div><div class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> YOUR IN-EDUNIME STUDY SPACE</div><h2>' + esc(subject) + '</h2><p>' + esc([classLevel, board, stream, exam].filter(Boolean).join(" · ")) + '</p></div></div>';
+    html += '<div class="resource-card-grid">';
+    html += '<article class="resource-card"><span class="resource-card-icon">📘</span><h3>Study guide</h3><p>A focused learning structure for your topic, with a clear order to follow and a checklist to track your study session.</p><a href="#inSiteStudy">Open study guide ↓</a></article>';
+    html += '<article class="resource-card"><span class="resource-card-icon">✎</span><h3>Revision checklist</h3><p>Use the checklist on this page to organise your revision without leaving Edunime.</p><a href="#inSiteStudy">Start revision ↓</a></article>';
+    html += '<article class="resource-card"><span class="resource-card-icon">◎</span><h3>Practice questions</h3><p>Try short self-check questions for your topic. Use your textbook or teacher’s notes to verify subject-specific answers.</p><a href="#inSiteStudy">Practice here ↓</a></article>';
+    html += '<article class="resource-card"><span class="resource-card-icon">▤</span><h3>Flashcard starter</h3><p>Create a quick recall set from the topic words you entered. Edit the prompts as you learn more.</p><a href="#inSiteStudy">Open flashcards ↓</a></article>';
+    html += '<article class="resource-card"><span class="resource-card-icon">▶</span><h3>Video learning</h3><p>Video search results cannot reliably be shown inside another page without a specific embeddable video. Edunime will not redirect you automatically.</p></article>';
+    html += officialCard;
     html += '</div>';
-    const depthText = depth === "simple" ? "Start with intuitive explanations, everyday examples, vocabulary and short checks for understanding." : depth === "advanced" ? "Include formal definitions, assumptions, derivations, limitations, research context, competing interpretations and references." : depth === "exam" ? "Prioritise syllabus mapping, high-yield concepts, formula sheets, common mistakes, timed practice and answer strategy." : "Include learning objectives, prerequisites, detailed concept-by-concept explanations, definitions, derivations, worked examples, diagrams to draw, real-world applications, misconceptions, summary tables and practice questions with explanations.";
-    const prompt = "Act as a careful subject tutor. Create original study notes for: " + identity + (exam ? "; competitive exam: " + exam : "") + ". Explanation level: " + depth + ". " + depthText + " Map each section to the official syllabus if available. State assumptions and the academic year. Do not invent syllabus facts, exam dates, citations, or source links. Separate verified facts from explanations and tell me what to confirm from the official authority. End with a glossary, a concise revision sheet, 10 practice questions of varied difficulty, and fully explained answers. If a topic is too broad, split it into chapters and teach one chapter at a time.";
-    html += '<section class="resource-prompt"><h3>Detailed-notes prompt</h3><p>This creates a reusable prompt for an AI assistant; this static website does not itself call an AI model or generate live notes.</p><pre id="notesPrompt">' + esc(prompt) + '</pre><button type="button" id="copyPrompt">Copy notes prompt</button> <span id="copyStatus" role="status"></span></section>';
+    html += '<section class="resource-prompt in-site-study" id="inSiteStudy"><h3>Study guide — inside Edunime</h3><p>This is an in-site study framework tailored to your topic, not a claim that Edunime has fetched or verified a complete textbook chapter.</p><h4>1. Learning focus</h4><p>Topic: <strong>' + esc(subject) + '</strong></p><p>Level: ' + esc(level) + ' · Explanation style: ' + esc(depth) + '</p><h4>2. Key terms to investigate</h4><ul>' + (keyTerms.length ? keyTerms : [subject]).map(x => '<li>' + esc(x) + '</li>').join("") + '</ul><h4>3. Revision checklist</h4><ul class="in-site-checklist">' + checklist.map((x, i) => '<li><label><input type="checkbox"> ' + esc(x) + '</label></li>').join("") + '</ul><h4>4. Practice questions</h4><ol>' + questions.map(x => '<li>' + esc(x) + '</li>').join("") + '</ol><h4>5. Flashcard starter</h4><div class="in-site-flashcards">' + topicWords.map((word, i) => '<details><summary>Card ' + (i + 1) + ': What should I know about “' + esc(word) + '”?</summary><p>Write a one- or two-sentence definition, then add an example from your textbook or class notes.</p></details>').join("") + '</div><h4>6. Notes prompt</h4><p>Copy this prompt into an AI assistant if you want a longer draft. Review it against trusted course materials before using it.</p><pre id="notesPrompt">' + esc(prompt) + '</pre><button type="button" id="copyPrompt">Copy notes prompt</button> <span id="copyStatus" role="status"></span></section>';
     results.innerHTML = html;
-    const copy = document.getElementById("copyPrompt");
-    copy.addEventListener("click", async function () {
+    document.getElementById("copyPrompt").addEventListener("click", async function () {
       const status = document.getElementById("copyStatus");
       try {
         await navigator.clipboard.writeText(prompt);

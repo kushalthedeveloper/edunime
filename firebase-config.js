@@ -1,11 +1,11 @@
 // Public Firebase web-app configuration for Edunime.
-// These values identify your Firebase project; they are not server credentials.
-// Replace the placeholder strings using Firebase Console > Project settings > Your apps.
+// These values identify your Firebase project; never put server credentials here.
 export const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.firebasestorage.app',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID'
+  apiKey: 'AIzaSyB7-m0OlMB8UuZxyM_PemEdV2UfVATYha8',
+  authDomain: 'edunime-5d91a.firebaseapp.com',
+  projectId: 'edunime-5d91a',
+  storageBucket: 'edunime-5d91a.firebasestorage.app',
+  messagingSenderId: '306621586632',
+  appId: '1:306621586632:web:a448447f7712ff0f32d9fd',
+  measurementId: 'G-25MPDEV37R'
 };

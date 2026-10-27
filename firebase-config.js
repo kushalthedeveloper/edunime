@@ -9,3 +9,7 @@ export const firebaseConfig = {
   appId: '1:306621586632:web:a448447f7712ff0f32d9fd',
   measurementId: 'G-25MPDEV37R'
 };
+
+// Public reCAPTCHA Enterprise site key for Firebase App Check.
+// Add the website SITE KEY after creating it in Google Cloud; never put a secret key here.
+export const recaptchaEnterpriseSiteKey = "";

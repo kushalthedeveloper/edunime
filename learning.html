@@ -1,39 +1,78 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101828">
-  <meta name="description" content="Explore topics and study resources on Edunime.">
-  <title>Learning Path — Edunime</title>
+  <title>Learning Path | Edunime</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="learning.css">
+  <link rel="stylesheet" href="progress.css">
 </head>
 <body class="learning-page">
+
   <header class="site-header">
-    <a class="brand" href="index.html#home" aria-label="Edunime home"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a>
-    <nav class="nav learning-nav"><a href="index.html#learn">Explore subjects</a><a href="index.html#planner">Study planner</a><a href="index.html#about">About</a></nav>
-    <a class="header-cta" href="index.html#learn">All subjects <span aria-hidden="true">↗</span></a>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">E</span>
+      <span>edu<span class="brand-accent">nime</span></span>
+    </a>
+    <nav class="nav learning-nav">
+      <a href="index.html#learn">Subjects</a>
+      <a href="index.html#planner">Study Plan</a>
+      <a href="index.html#about">About</a>
+    </nav>
+    <a class="header-cta" href="index.html#learn">All subjects →</a>
   </header>
+
   <main>
     <section class="learning-hero">
-      <a class="back-link" href="index.html#learn">← Back to all subjects</a>
-      <div class="learning-eyebrow"><span class="eyebrow-dot"></span> YOUR LEARNING PATH</div>
+      <a class="back-link" href="index.html#learn">← Back to subjects</a>
+      <div class="learning-eyebrow">
+        <span class="eyebrow-dot"></span> YOUR LEARNING PATH
+      </div>
       <div class="learning-hero-grid">
-        <div><h1 id="subjectTitle">Explore a subject.</h1><p id="subjectDescription">Choose a topic and start learning at your own pace.</p><div class="learning-tags"><span id="subjectLevel">FOUNDATIONS</span><span>SELF-PACED</span><span>LEARN BY DOING</span></div></div>
-        <div class="learning-hero-art" id="subjectArt" aria-hidden="true"><span>✦</span></div>
+        <div>
+          <h1 id="subjectTitle">Explore a subject</h1>
+          <p id="subjectDescription">Learn at your own pace.</p>
+          <div class="learning-tags">
+            <span id="subjectLevel">FOUNDATIONS</span>
+            <span>SELF-PACED</span>
+            <span>LEARN BY DOING</span>
+          </div>
+        </div>
+        <div class="learning-hero-art" id="subjectArt" aria-hidden="true">✦</div>
       </div>
     </section>
+
     <section class="learning-content">
-      <div class="learning-section-title"><div><div class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> CHOOSE YOUR NEXT STEP</div><h2>Topics to explore</h2></div><p>Start with the basics, then build your understanding one topic at a time.</p></div>
-      <div class="topic-grid" id="topicGrid"></div>
-      <section class="resource-panel">
-        <div class="resource-panel-icon">✎</div><div><div class="resource-kicker">STUDY SMARTER</div><h2>Make this lesson yours.</h2><p>Write a short summary, list questions you still have, and practise explaining the idea in your own words.</p><a class="resource-link" href="index.html#planner">Create a study plan <span>→</span></a></div>
-      </section>
-      <p class="learning-note">Learning content on this starter page is an outline. Detailed notes, quizzes, videos, and saved progress can be added in future updates.</p>
+      <div class="learning-section-title">
+        <div>
+          <div class="eyebrow dark-eyebrow">CHOOSE YOUR NEXT STEP</div>
+          <h2>Topics to explore</h2>
+        </div>
+        <p>Build your understanding one topic at a time.</p>
+      </div>
+
+      <div id="subjectProgress" class="progress-panel"></div>
+
+      <div id="topicGrid" class="topic-grid"></div>
+
+      <p class="learning-note">
+        Your progress is saved in this browser on this device.
+      </p>
     </section>
   </main>
-  <footer class="footer"><a class="brand footer-brand" href="index.html#home"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a><p>Learn with purpose. Grow with confidence.</p><span>© <span id="year"></span> Edunime · A learning project</span></footer>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="index.html">
+      <span class="brand-mark">E</span>
+      <span>edu<span class="brand-accent">nime</span></span>
+    </a>
+    <p>Learn with purpose. Grow with confidence.</p>
+    <span>© <span id="year"></span> Edunime</span>
+  </footer>
+
   <script src="learning.js"></script>
+  <script src="progress.js"></script>
 </body>
 </html>

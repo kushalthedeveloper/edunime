@@ -30,3 +30,5 @@
   .resource-prompt{background:white!important;color:black!important;border:0!important;break-inside:avoid}
   .resource-prompt h3,.resource-prompt h4,.resource-prompt p,.resource-prompt li{color:black!important}
 }
+
+.resource-video-link{display:inline-flex;align-items:center;gap:8px;margin:7px 8px 7px 0;padding:12px 15px;border-radius:10px;background:#171c2a;color:#fff;text-decoration:none;font-size:12px;font-weight:700}.resource-video-link.secondary-link{background:#f1effb;color:#6446c4}.in-site-study h4{margin:20px 0 7px;font-size:15px;color:#222a3b}.in-site-study p,.in-site-study li{font-size:13px;line-height:1.85;color:#d0d6e2}.in-site-study ol,.in-site-study ul{padding-left:22px}.in-site-study a{overflow-wrap:anywhere}@media print{.site-header,.resource-hero,.resource-finder,.resource-note,.footer,.resource-card-grid{display:none!important}.resource-prompt{background:white!important;color:black!important;border:0!important;break-inside:avoid}.resource-prompt p,.resource-prompt li{color:#222!important}.resource-prompt h3,.resource-prompt h4{color:#111!important}}

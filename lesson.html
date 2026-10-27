@@ -1,39 +1,165 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101828">
-  <title>Lesson — Edunime</title>
+  <title>Lesson | Edunime</title>
+
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="learning.css">
   <link rel="stylesheet" href="lesson.css">
 </head>
+
 <body class="learning-page">
+
   <header class="site-header">
-    <a class="brand" href="index.html#home" aria-label="Edunime home"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a>
-    <nav class="nav learning-nav"><a href="index.html#learn">Explore subjects</a><a href="index.html#planner">Study planner</a><a href="index.html#about">About</a></nav>
-    <a class="header-cta" id="allTopicsLink" href="index.html#learn">All subjects <span aria-hidden="true">↗</span></a>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">E</span>
+      <span>edu<span class="brand-accent">nime</span></span>
+    </a>
+
+    <nav class="nav learning-nav">
+      <a href="index.html#learn">Subjects</a>
+      <a href="index.html#planner">Study Plan</a>
+      <a href="index.html#about">About</a>
+    </nav>
+
+    <a class="header-cta" href="index.html#learn">
+      All subjects →
+    </a>
   </header>
+
   <main>
     <section class="lesson-hero">
-      <a class="back-link" id="backToTopics" href="index.html#learn">← Back to subject</a>
-      <div class="learning-eyebrow"><span class="eyebrow-dot"></span> EDUNIME LESSON</div>
-      <div class="lesson-hero-row"><div><div class="lesson-count" id="lessonCount">TOPIC 01</div><h1 id="lessonTitle">Lesson title</h1><p id="lessonIntro">Your lesson begins here.</p></div><div class="lesson-hero-symbol" id="lessonSymbol" aria-hidden="true">✦</div></div>
+      <a class="back-link" id="backToTopics" href="index.html#learn">
+        ← Back to subject
+      </a>
+
+      <div class="learning-eyebrow">
+        <span class="eyebrow-dot"></span>
+        EDUNIME LESSON
+      </div>
+
+      <div class="lesson-hero-row">
+        <div>
+          <div class="lesson-count" id="lessonCount">TOPIC 01</div>
+          <h1 id="lessonTitle">Your lesson</h1>
+          <p id="lessonIntro">Start learning one step at a time.</p>
+        </div>
+
+        <div class="lesson-hero-symbol" id="lessonSymbol" aria-hidden="true">
+          ✦
+        </div>
+      </div>
     </section>
+
     <section class="lesson-layout">
       <article class="lesson-main">
-        <div class="lesson-block"><div class="lesson-block-label">01 · UNDERSTAND</div><h2>Core idea</h2><div id="coreContent"></div></div>
-        <div class="lesson-block example-block"><div class="lesson-block-label">02 · SEE IT IN ACTION</div><h2>Worked example</h2><div id="exampleContent"></div></div>
-        <div class="lesson-block"><div class="lesson-block-label">03 · CHECK YOUR UNDERSTANDING</div><h2>Quick practice</h2><p id="practicePrompt"></p><div id="practiceOptions" class="practice-options"></div><div id="practiceFeedback" class="practice-feedback" aria-live="polite" hidden></div></div>
-        <div class="lesson-block notes-block"><div class="lesson-block-label">04 · YOUR NOTES</div><h2>Write a summary</h2><p>Write the key idea in your own words. This starter version keeps notes in this browser on this device only.</p><textarea id="studentNotes" rows="5" placeholder="My summary, examples, or questions..."></textarea><div class="notes-actions"><span id="saveStatus">Notes are stored locally in this browser.</span><button id="saveNotes" class="button button-primary" type="button">Save notes</button></div></div>
-        <div class="lesson-navigation"><a id="previousTopic" class="lesson-nav-button" href="#">← Previous topic</a><a id="nextTopic" class="lesson-nav-button next" href="#">Next topic →</a></div>
+
+        <div class="lesson-block">
+          <div class="lesson-block-label">01 · UNDERSTAND</div>
+          <h2>Core idea</h2>
+          <div id="coreContent">
+            <p>Your lesson content will appear here.</p>
+          </div>
+        </div>
+
+        <div class="lesson-block example-block">
+          <div class="lesson-block-label">02 · LEARN BY EXAMPLE</div>
+          <h2>Worked example</h2>
+          <div id="exampleContent">
+            <p>Follow the example to strengthen your understanding.</p>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="lesson-block-label">03 · PRACTICE</div>
+          <h2>Check your understanding</h2>
+
+          <p id="practicePrompt">
+            Try the practice question for this lesson.
+          </p>
+
+          <div id="practiceOptions" class="practice-options"></div>
+
+          <div
+            id="practiceFeedback"
+            class="practice-feedback"
+            aria-live="polite"
+            hidden
+          ></div>
+        </div>
+
+        <div class="lesson-block notes-block">
+          <div class="lesson-block-label">04 · YOUR NOTES</div>
+          <h2>Write a summary</h2>
+
+          <p>Write down the key idea in your own words.</p>
+
+          <textarea
+            id="studentNotes"
+            rows="5"
+            placeholder="Write your notes here..."
+          ></textarea>
+
+          <div class="notes-actions">
+            <span id="saveStatus">Your notes are ready.</span>
+            <button id="saveNotes" class="button button-primary" type="button">
+              Save notes
+            </button>
+          </div>
+        </div>
+
+        <!-- Lesson progress appears here -->
+        <div id="lessonCompletion" class="progress-completion"></div>
+
+        <div class="lesson-navigation">
+          <a id="previousTopic" class="lesson-nav-button" href="#">
+            ← Previous topic
+          </a>
+
+          <a id="nextTopic" class="lesson-nav-button next" href="#">
+            Next topic →
+          </a>
+        </div>
+
       </article>
-      <aside class="lesson-sidebar"><div class="sidebar-card"><div class="sidebar-label">YOUR LEARNING PATH</div><h3 id="sidebarSubject">Subject</h3><div id="sidebarTopics" class="sidebar-topics"></div></div><div class="sidebar-tip"><span>✦</span><b>Study tip</b><p>Pause after each section and explain the idea without looking. If you can explain it simply, you're making progress.</p></div></aside>
+
+      <aside class="lesson-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-label">YOUR LEARNING PATH</div>
+          <h3 id="sidebarSubject">Your subject</h3>
+          <div id="sidebarTopics" class="sidebar-topics"></div>
+        </div>
+
+        <div class="sidebar-tip">
+          <span>✦</span>
+          <b>Study tip</b>
+          <p>
+            After studying, try explaining the main idea in your own words.
+            Practising helps you remember what you learn.
+          </p>
+        </div>
+      </aside>
     </section>
   </main>
-  <footer class="footer"><a class="brand footer-brand" href="index.html#home"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a><p>Learn with purpose. Grow with confidence.</p><span>© <span id="year"></span> Edunime · A learning project</span></footer>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="index.html">
+      <span class="brand-mark">E</span>
+      <span>edu<span class="brand-accent">nime</span></span>
+    </a>
+
+    <p>Learn with purpose. Grow with confidence.</p>
+    <span>© <span id="year"></span> Edunime</span>
+  </footer>
+
+  <!-- Keep these scripts in this order -->
   <script src="learning.js"></script>
   <script src="lesson.js"></script>
+  <script src="progress.js"></script>
+
 </body>
 </html>

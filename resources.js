@@ -100,7 +100,8 @@
       const ai = aiSdk.getAI(app, {backend: new aiSdk.GoogleAIBackend()});
       const model = aiSdk.getGenerativeModel(ai, {model:"gemini-3.8-flash"});
       const prompt = `You are Edunime, an accurate educational tutor. Create original, topic-specific study material for this learner. Context: ${JSON.stringify(context)}. Exact topic: "${subject}". Tailor content to the selected curriculum and level; if exact syllabus details are uncertain, clearly flag that and teach the core subject accurately rather than inventing syllabus claims. Return ONLY valid JSON with this schema: {"title":"...","intro":"...","notes":[{"heading":"...","body":"Detailed explanation with examples; use plain text and newline for equations"}],"keyPoints":["..."],"flashcards":[{"q":"...","a":"..."}],"quiz":[{"q":"...","options":["A ...","B ...","C ...","D ..."],"answer":"exact option text","explanation":"..."}],"studyTips":["..."]}. Provide 6-10 substantial notes, 6-10 key points, 6-10 flashcards and 5 multiple-choice questions with correct answers and explanations. Include formulas and worked examples when appropriate; for non-mathematical topics use relevant concepts, timelines, processes, evidence or examples. Avoid generic filler. Do not claim to quote textbooks. `;
-      const response = await model.generateContent(prompt);
+      const responseResult = await Promise.race([model.generateContent(prompt), new Promise((_, reject) => setTimeout(() => reject(new Error("AI request timed out after 45 seconds. Check Firebase AI Logic setup and App Check.")), 45000))]);
+      const response = responseResult;
       let raw = response.response.text().trim().replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/,"");
       const data = JSON.parse(raw);
       const title = esc(data.title || subject + " — Study Notes");
@@ -119,7 +120,8 @@
       results.scrollIntoView({behavior:"smooth",block:"start"});
     } catch (error) {
       console.error("Edunime AI notes error:", error);
-      results.innerHTML = '<div class="resource-results-empty"><h2>AI note generation failed</h2><p>Firebase AI Logic must be enabled for this project before Edunime can generate notes for any topic. In Firebase Console, open <strong>AI Services → AI Logic → Get started</strong>, choose the Gemini Developer API, and complete setup. If AI Logic is already enabled, the error may be caused by App Check, API setup, or model availability. Open the browser console for the exact error.</p><p>No generic notes are being presented as topic-specific material.</p></div>';
+      const detail = error && (error.message || error.code) ? String(error.code ? error.code + ": " : "") + String(error.message || "") : "Unknown error";
+      results.innerHTML = '<div class="resource-results-empty"><h2>Could not generate AI notes</h2><p>Edunime could not get a usable response from Firebase AI Logic.</p><p><strong>Error details:</strong> <code>'+esc(detail)+'</code></p><p>Check Firebase Console → AI Services → AI Logic, confirm the Gemini Developer API is configured, and review App Check. Then refresh this page and try again.</p><p>No generic notes are being presented as topic-specific material.</p></div>';
     }
   }
 

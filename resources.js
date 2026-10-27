@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  let appCheckInitialized = false;
   const form = document.getElementById("resourceForm");
   const results = document.getElementById("resourceResults");
   const year = document.getElementById("year");
@@ -101,11 +102,12 @@
         throw new Error("App Check setup is incomplete: the reCAPTCHA Enterprise SITE KEY has not been added to firebase-config.js yet.");
       }
       const appCheckSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app-check.js");
-      if (!appCheckSdk.getAppCheck(app)) {
+      if (!appCheckInitialized) {
         appCheckSdk.initializeAppCheck(app, {
           provider: new appCheckSdk.ReCaptchaEnterpriseProvider(cfg.recaptchaEnterpriseSiteKey),
           isTokenAutoRefreshEnabled: true
         });
+        appCheckInitialized = true;
       }
       const ai = aiSdk.getAI(app, {backend: new aiSdk.GoogleAIBackend()});
       const model = aiSdk.getGenerativeModel(ai, {model:"gemini-3.5-flash-lite"});

@@ -32,8 +32,6 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function searchUrl(query) { return "https://www.google.com/search?q=" + encodeURIComponent(query); }
-  function videoUrl(query) { return "https://www.youtube.com/results?search_query=" + encodeURIComponent(query); }
   function card(icon, title, description, url, label, secondaryUrl, secondaryLabel) {
     return '<article class="resource-card"><span class="resource-card-icon">' + icon + '</span><h3>' + esc(title) + '</h3><p>' + esc(description) + '</p><a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + esc(label || "Open resources") + ' ↗</a>' +
       (secondaryUrl ? '<a class="secondary-link" href="' + esc(secondaryUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(secondaryLabel || "More resources") + ' ↗</a>' : "") + '</article>';
@@ -42,10 +40,17 @@
     event.preventDefault();
     const data = new FormData(form);
     const level = data.get("level"), board = data.get("board"), classLevel = data.get("classLevel");
-    const stream = data.get("stream"), subject = String(data.get("subjectInput") || "").trim(), exam = data.get("exam");
+    const stream = data.get("stream"), selectedSubject = String(data.get("subjectPreset") || "").trim(), typedTopic = String(data.get("subjectInput") || "").trim(), exam = data.get("exam");
     const depth = data.get("depth");
-    if (!subject) return;
-    const identity = [board !== "Not applicable" ? board : "", classLevel, stream !== "General" ? stream : "", subject].filter(Boolean).join(" ");
+    const subject = typedTopic ? (selectedSubject && selectedSubject !== "Other / exact topic" ? selectedSubject + " — " + typedTopic : typedTopic) : selectedSubject;
+    if (!subject) {
+      const input = document.getElementById("subjectInput");
+      input.setCustomValidity("Choose a subject or type a chapter/topic.");
+      input.reportValidity();
+      input.setCustomValidity("");
+      return;
+    }
+    const identity = [board !== "Not applicable" ? board : "", classLevel, subject].filter(Boolean).join(" ");
     const source = official[board] || null;
     const prompt = "Act as a careful subject tutor. Create original study notes for: " + identity + (exam ? "; competitive exam: " + exam : "") + ". Explanation level: " + depth + ". Include learning objectives, key terms, clear explanations, worked examples, common mistakes, a revision summary and practice questions with explained answers. Match the current official syllabus where possible. Do not invent syllabus facts, exam dates, citations or source links; clearly identify anything that needs verification.";
     const officialCard = source && source.url
@@ -74,7 +79,7 @@
     html += '<article class="resource-card"><span class="resource-card-icon">✎</span><h3>Revision checklist</h3><p>Use the checklist on this page to organise your revision without leaving Edunime.</p><a href="#inSiteStudy">Start revision ↓</a></article>';
     html += '<article class="resource-card"><span class="resource-card-icon">◎</span><h3>Practice questions</h3><p>Try short self-check questions for your topic. Use your textbook or teacher’s notes to verify subject-specific answers.</p><a href="#inSiteStudy">Practice here ↓</a></article>';
     html += '<article class="resource-card"><span class="resource-card-icon">▤</span><h3>Flashcard starter</h3><p>Create a quick recall set from the topic words you entered. Edit the prompts as you learn more.</p><a href="#inSiteStudy">Open flashcards ↓</a></article>';
-    html += '<article class="resource-card"><span class="resource-card-icon">▶</span><h3>Video learning</h3><p>Video search results cannot reliably be shown inside another page without a specific embeddable video. Edunime will not redirect you automatically.</p></article>';
+    html += '<article class="resource-card"><span class="resource-card-icon">▶</span><h3>Video learning</h3><p>No external search will open from this card. In-site video lessons can be added when Edunime has approved or embeddable video sources.</p></article>';
     html += officialCard;
     html += '</div>';
     html += '<section class="resource-prompt in-site-study" id="inSiteStudy"><h3>Study guide — inside Edunime</h3><p>This is an in-site study framework tailored to your topic, not a claim that Edunime has fetched or verified a complete textbook chapter.</p><h4>1. Learning focus</h4><p>Topic: <strong>' + esc(subject) + '</strong></p><p>Level: ' + esc(level) + ' · Explanation style: ' + esc(depth) + '</p><h4>2. Key terms to investigate</h4><ul>' + (keyTerms.length ? keyTerms : [subject]).map(x => '<li>' + esc(x) + '</li>').join("") + '</ul><h4>3. Revision checklist</h4><ul class="in-site-checklist">' + checklist.map((x, i) => '<li><label><input type="checkbox"> ' + esc(x) + '</label></li>').join("") + '</ul><h4>4. Practice questions</h4><ol>' + questions.map(x => '<li>' + esc(x) + '</li>').join("") + '</ol><h4>5. Flashcard starter</h4><div class="in-site-flashcards">' + topicWords.map((word, i) => '<details><summary>Card ' + (i + 1) + ': What should I know about “' + esc(word) + '”?</summary><p>Write a one- or two-sentence definition, then add an example from your textbook or class notes.</p></details>').join("") + '</div><h4>6. Notes prompt</h4><p>Copy this prompt into an AI assistant if you want a longer draft. Review it against trusted course materials before using it.</p><pre id="notesPrompt">' + esc(prompt) + '</pre><button type="button" id="copyPrompt">Copy notes prompt</button> <span id="copyStatus" role="status"></span></section>';

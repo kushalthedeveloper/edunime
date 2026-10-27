@@ -98,11 +98,11 @@
       const appSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js");
       const aiSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-ai.js");
       const app = appSdk.getApps().length ? appSdk.getApp() : appSdk.initializeApp(cfg.firebaseConfig);
-      if (!cfg.recaptchaEnterpriseSiteKey) {
-        throw new Error("App Check setup is incomplete: the reCAPTCHA Enterprise SITE KEY has not been added to firebase-config.js yet.");
-      }
-      const appCheckSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app-check.js");
-      if (!appCheckInitialized) {
+      // App Check is initialized when a site key has been configured.
+      // Do not block AI generation solely because the optional site key is not configured;
+      // Firebase AI Logic will return its own actionable error if App Check is enforced.
+      if (cfg.recaptchaEnterpriseSiteKey && !appCheckInitialized) {
+        const appCheckSdk = await import("https://www.gstatic.com/firebasejs/11.10.0/firebase-app-check.js");
         appCheckSdk.initializeAppCheck(app, {
           provider: new appCheckSdk.ReCaptchaEnterpriseProvider(cfg.recaptchaEnterpriseSiteKey),
           isTokenAutoRefreshEnabled: true

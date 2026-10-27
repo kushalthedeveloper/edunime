@@ -16,7 +16,7 @@
     "UPSC Civil Services": ["https://upsc.gov.in/"],
     "SSC CGL / CHSL": ["https://ssc.gov.in/"],
     "Banking exams (IBPS / SBI)": ["https://www.ibps.in/", "https://sbi.co.in/web/careers"],
-    "GATE": ["https://gate2026.iisc.ac.in/"],
+    "GATE": [],
     "CAT": ["https://iimcat.ac.in/"],
     "CLAT": ["https://consortiumofnlus.ac.in/"],
     "CTET / TET": ["https://ctet.nic.in/"],

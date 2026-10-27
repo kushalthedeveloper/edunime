@@ -92,7 +92,7 @@
     if (toggle && nav && !toggle.dataset.menuReady) {
       toggle.dataset.menuReady = "true";
       toggle.addEventListener("click", function () {
-        const open = nav.classList.toggle("nav-open");
+        const open = nav.classList.toggle("open");
         toggle.setAttribute("aria-expanded", String(open));
         toggle.textContent = open ? "×" : "☰";
       });

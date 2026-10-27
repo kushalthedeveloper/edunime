@@ -7,7 +7,7 @@
   <meta name="description" content="Find syllabus sources, detailed study notes, handwritten notes, lessons and educational videos for your learning level.">
   <title>Study Resources & Syllabus — Edunime</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="resources.css">
+  <link rel="stylesheet" href="resources.css?v=3">
 </head>
 <body class="resources-page">
   <header class="site-header">
@@ -25,14 +25,14 @@
       <div class="resource-hero-copy">
         <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PERSONAL STUDY LIBRARY</div>
         <h1>Learn deeply.<br><span class="gradient-text">Find your next source.</span></h1>
-        <p>Choose your level, board or exam and subject to discover official syllabus pages, detailed-note searches, handwritten notes, worked examples and educational videos.</p>
+        <p>Choose your level and subject to build a study space with notes structure, revision tasks, flashcards and practice questions directly on Edunime.</p>
         <div class="resource-pills"><span>School to research</span><span>India-wide boards</span><span>Source-first learning</span></div>
       </div>
       <div class="resource-hero-art" aria-hidden="true"><div class="resource-orbit"></div><div class="resource-book">∑<span>✦</span></div><div class="resource-float rf-one">NOTES · VIDEOS</div><div class="resource-float rf-two">LEARN AT YOUR PACE</div></div>
     </section>
 
     <section class="resource-finder section" id="resourceFinder">
-      <div class="resource-heading"><div class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> BUILD YOUR LEARNING PATH</div><h2>Tell us what you're studying.</h2><p>Your choices shape the search links and official sources below. Select “Not applicable” where a board or exam doesn't apply.</p></div>
+      <div class="resource-heading"><div class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> BUILD YOUR LEARNING PATH</div><h2>Tell us what you're studying.</h2><p>Your choices build study materials on this page. Only official authority portals open outside Edunime.</p></div>
       <form id="resourceForm" class="resource-form">
         <div class="resource-field"><label for="level">Learning level</label><select id="level" name="level">
           <option value="school">School (Class 1–10)</option><option value="senior">Senior secondary (Class 11–12)</option><option value="college">College / Undergraduate</option><option value="postgrad">Postgraduate</option><option value="research">Research / PhD scholar</option><option value="competitive">Competitive exam preparation</option>
@@ -43,8 +43,9 @@
         <div class="resource-field"><label for="classLevel">Class / year</label><select id="classLevel" name="classLevel">
           <option>Class 1</option><option>Class 2</option><option>Class 3</option><option>Class 4</option><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>1st year</option><option>2nd year</option><option>3rd year</option><option>4th year</option><option>Master's</option><option>PhD / research</option><option>Exam-specific</option>
         </select></div>
-        <div class="resource-field"><label for="stream">Stream / subject area</label><select id="stream" name="stream"><option>General</option><option>Science</option><option>Mathematics</option><option>Commerce</option><option>Accountancy</option><option>Business Studies</option><option>Economics</option><option>Humanities / Arts</option><option>Computer Science / IT</option><option>Engineering</option><option>Medicine / Biology</option><option>Law</option><option>Research methods</option><option>Other</option></select></div>
-        <div class="resource-field resource-wide"><label for="subjectInput">Subject or exact topic</label><input id="subjectInput" name="subjectInput" placeholder="e.g. Accountancy — partnership accounts, or Class 8 — force and pressure" required maxlength="140"></div>
+        <div class="resource-field"><label for="stream">Stream / subject area</label><select id="stream" name="stream"><option>General</option><option>Science</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Botany</option><option>Zoology</option><option>Environmental Science</option><option>English</option><option>Hindi</option><option>Telugu</option><option>Sanskrit</option><option>Other language</option><option>Social Studies</option><option>History</option><option>Geography</option><option>Civics / Political Science</option><option>Economics</option><option>Commerce</option><option>Accountancy</option><option>Business Studies</option><option>Statistics</option><option>Computer Science</option><option>Information Technology</option><option>Artificial Intelligence</option><option>Robotics</option><option>Engineering</option><option>Medicine / Health Science</option><option>Psychology</option><option>Sociology</option><option>Philosophy</option><option>Law</option><option>Physical Education</option><option>Art / Music</option><option>Agriculture</option><option>Research methods</option><option>Other</option></select></div>
+        <div class="resource-field"><label for="subjectPreset">Subject</label><select id="subjectPreset" name="subjectPreset"><option value="">Choose a subject (or type a topic below)</option><option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>English</option><option>Hindi</option><option>Telugu</option><option>Social Studies</option><option>History</option><option>Geography</option><option>Political Science</option><option>Economics</option><option>Accountancy</option><option>Business Studies</option><option>Statistics</option><option>Computer Science</option><option>Information Technology</option><option>Environmental Science</option><option>Psychology</option><option>Sociology</option><option>Physical Education</option><option>Agriculture</option><option>Engineering</option><option>Medicine / Biology</option><option>Law</option><option>Other / exact topic</option></select></div>
+        <div class="resource-field resource-wide"><label for="subjectInput">Chapter / topic (optional if you selected a subject)</label><input id="subjectInput" name="subjectInput" placeholder="e.g. Force and pressure, quadratic equations, photosynthesis" maxlength="140"></div>
         <div class="resource-field"><label for="exam">Competitive exam (optional)</label><select id="exam" name="exam"><option value="">Not a competitive exam</option><option>JEE Main / Advanced</option><option>NEET UG</option><option>CUET UG / PG</option><option>UPSC Civil Services</option><option>SSC CGL / CHSL</option><option>Banking exams (IBPS / SBI)</option><option>GATE</option><option>CAT</option><option>CLAT</option><option>CTET / TET</option><option>NDA</option><option>CA Foundation / Intermediate / Final</option><option>CMA</option><option>CS Executive / Professional</option><option>UGC NET</option><option>State PSC</option><option>Other competitive exam</option></select></div>
         <div class="resource-field"><label for="depth">Explanation depth</label><select id="depth" name="depth"><option value="simple">Start from the basics</option><option value="detailed" selected>Detailed chapter notes</option><option value="advanced">Advanced / scholar level</option><option value="exam">Exam-focused revision</option></select></div>
         <button class="button button-primary resource-submit" type="submit">Find my study resources <span>→</span></button>
@@ -56,10 +57,10 @@
     </section>
 
     <section class="resource-note section">
-      <div class="resource-note-icon">i</div><div><h2>Use reliable sources</h2><p>Edunime links you to external search results and official portals; it does not claim to own third-party notes or verify every result. Check the current academic year, syllabus version, author, copyright terms and exam authority notice before relying on a resource. Exam dates and syllabus changes must be confirmed on the official authority website.</p></div>
+      <div class="resource-note-icon">i</div><div><h2>Use reliable sources</h2><p>Study guides, revision checklists, flashcard starters and practice prompts are shown inside Edunime. Official syllabus and exam authority portals may open externally. The in-site guide is a learning framework, not a verified substitute for your prescribed textbook.</p></div>
     </section>
   </main>
   <footer class="footer"><a class="brand footer-brand" href="index.html"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a><p>Learn with purpose. Grow with confidence.</p><span>© <span id="year"></span> Edunime</span></footer>
-  <script src="resources.js"></script>
+  <script src="resources.js?v=3"></script>
 </body>
 </html>

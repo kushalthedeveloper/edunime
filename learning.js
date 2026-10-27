@@ -66,6 +66,7 @@ const subjectData = {
     ]
   }
 };
+if (document.getElementById("subjectTitle")) {
 const fallback = subjectData.mathematics;
 const slug = new URLSearchParams(window.location.search).get("subject") || "mathematics";
 const subject = subjectData[slug] || fallback;
@@ -75,13 +76,15 @@ document.getElementById("subjectDescription").textContent = subject.description;
 document.getElementById("subjectLevel").textContent = subject.level;
 document.getElementById("subjectArt").innerHTML = `<span>${escapeHTML(subject.symbol)}</span>`;
 document.getElementById("topicGrid").innerHTML = subject.topics.map((topic, index) => `
-  <article class="topic-card">
+  <a class="topic-card" href="lesson.html?subject=${encodeURIComponent(slug)}&topic=${index}">
     <span class="topic-number">${String(index + 1).padStart(2, "0")}</span>
     <h3>${escapeHTML(topic[0])}</h3>
     <p>${escapeHTML(topic[1])}</p>
-    <div class="topic-footer"><span>${escapeHTML(topic[2])}</span><span>↗</span></div>
-  </article>`).join("");
+    <div class="topic-footer"><span>Open lesson</span><span>↗</span></div>
+  </a>`).join("");
 document.getElementById("year").textContent = new Date().getFullYear();
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+}
+
 }

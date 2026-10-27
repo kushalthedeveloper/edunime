@@ -80,9 +80,23 @@
   }
   function enhanceNavigation() {
     document.querySelectorAll(".nav, .learning-nav").forEach(nav => {
-      if (nav.querySelector('[href="dashboard.html"]')) return;
-      const link = document.createElement("a"); link.href = "dashboard.html"; link.textContent = "My progress"; nav.appendChild(link);
+      if (!nav.querySelector('[href="dashboard.html"]')) {
+        const link = document.createElement("a");
+        link.href = "dashboard.html";
+        link.textContent = "My progress";
+        nav.appendChild(link);
+      }
     });
+    const toggle = document.getElementById("menuToggle");
+    const nav = document.getElementById("nav");
+    if (toggle && nav && !toggle.dataset.menuReady) {
+      toggle.dataset.menuReady = "true";
+      toggle.addEventListener("click", function () {
+        const open = nav.classList.toggle("nav-open");
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.textContent = open ? "×" : "☰";
+      });
+    }
   }
   function init() { enhanceNavigation(); addLessonStudyGuide(); trackQuizAnswers(); renderDashboard(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();

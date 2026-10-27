@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101828">
+  <meta name="description" content="Find official school board, entrance exam, and government exam notices from Edunime.">
+  <title>Exam Updates | Edunime</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .updates-main{max-width:1120px;margin:0 auto;padding:44px 24px 72px}
+    .updates-hero{padding:44px 0 30px}
+    .updates-hero h1{font-size:clamp(2.2rem,5vw,4rem);line-height:1.05;letter-spacing:-.04em;margin:14px 0}
+    .updates-hero p{max-width:680px;color:var(--muted,#667085);line-height:1.7}
+    .updates-warning{border:1px solid #f0d7a5;background:#fff9e9;color:#684b12;border-radius:14px;padding:14px 16px;margin:22px 0 30px;font-size:.94rem;line-height:1.6}
+    .updates-tools{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 26px}
+    .updates-tools input,.updates-tools select{min-height:46px;border:1px solid #d0d5dd;border-radius:10px;padding:0 13px;background:#fff;color:#101828;font:inherit}
+    .updates-tools input{flex:1;min-width:210px}
+    .updates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
+    .update-card{border:1px solid #e4e7ec;border-radius:16px;padding:21px;background:#fff;display:flex;flex-direction:column;gap:11px;box-shadow:0 4px 16px #10182808}
+    .update-card .update-type{font-size:.72rem;letter-spacing:.09em;font-weight:750;color:#6941c6;text-transform:uppercase}
+    .update-card h2{font-size:1.18rem;margin:0;color:#101828}
+    .update-card p{margin:0;color:#667085;line-height:1.55;font-size:.94rem;flex:1}
+    .update-card a{font-weight:700;text-decoration:none;color:#6941c6;margin-top:4px}
+    .update-card a:hover{text-decoration:underline}
+    .updates-empty{padding:28px;text-align:center;color:#667085;border:1px dashed #d0d5dd;border-radius:14px;grid-column:1/-1}
+    .updates-foot{color:#667085;font-size:.9rem;line-height:1.6;margin-top:26px}
+    @media(max-width:600px){.updates-main{padding:24px 16px 48px}.updates-hero{padding-top:24px}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Edunime home"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav" id="nav">
+      <a href="index.html#learn">Explore</a>
+      <a href="resources.html">Study resources</a>
+      <a href="updates.html" aria-current="page">Exam updates</a>
+      <a href="index.html#planner">Study planner</a>
+    </nav>
+    <a class="header-cta" href="resources.html">Study resources ↗</a>
+  </header>
+
+  <main class="updates-main">
+    <section class="updates-hero">
+      <div class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> STAY PREPARED</div>
+      <h1>Exam updates, <span class="gradient-text">from official sources.</span></h1>
+      <p>Quick access to board notices, exam schedules, applications, results, syllabi, and admission information. Choose an official portal and confirm dates there before making plans.</p>
+    </section>
+
+    <div class="updates-warning"><strong>Important:</strong> This page is a directory of official portals, not a live notification feed. Edunime does not currently fetch or verify new notices automatically. Always check the official website for the latest announcement, deadline, and eligibility rules.</div>
+
+    <div class="updates-tools">
+      <input id="updateSearch" type="search" placeholder="Search exams, boards, or notices..." aria-label="Search exam portals">
+      <select id="updateCategory" aria-label="Filter by exam category">
+        <option value="all">All categories</option>
+        <option value="school">School boards</option>
+        <option value="entrance">Entrance exams</option>
+        <option value="government">Government exams</option>
+        <option value="state">State portals</option>
+      </select>
+    </div>
+
+    <section class="updates-grid" id="updatesGrid" aria-live="polite">
+      <article class="update-card" data-category="school" data-search="cbse central board secondary education class 10 class 12 syllabus date sheet results circulars">
+        <span class="update-type">School board</span><h2>CBSE</h2><p>Class 10 and 12 notices, curriculum, sample papers, date sheets, and results.</p><a href="https://www.cbse.gov.in/" target="_blank" rel="noopener noreferrer">Open official CBSE site ↗</a>
+      </article>
+      <article class="update-card" data-category="school" data-search="cisce icse isc class 10 class 12 syllabus timetable results">
+        <span class="update-type">School board</span><h2>CISCE · ICSE / ISC</h2><p>Official council notices, examination information, syllabi, and results.</p><a href="https://cisce.org/" target="_blank" rel="noopener noreferrer">Open official CISCE site ↗</a>
+      </article>
+      <article class="update-card" data-category="state" data-search="andhra pradesh ap bse ssc class 10 board exam timetable results">
+        <span class="update-type">State portal</span><h2>Andhra Pradesh · SSC</h2><p>Secondary school examination notices and updates from the state board.</p><a href="https://www.bse.ap.gov.in/" target="_blank" rel="noopener noreferrer">Open BSE Andhra Pradesh ↗</a>
+      </article>
+      <article class="update-card" data-category="state" data-search="andhra pradesh ap intermediate bie first year second year timetable results">
+        <span class="update-type">State portal</span><h2>Andhra Pradesh · Intermediate</h2><p>Intermediate public examination information, timetables, and results.</p><a href="https://bie.ap.gov.in/" target="_blank" rel="noopener noreferrer">Open BIE Andhra Pradesh ↗</a>
+      </article>
+      <article class="update-card" data-category="entrance" data-search="nta national testing agency jee main neet ug cuet ug exams notifications">
+        <span class="update-type">Entrance exams</span><h2>National Testing Agency (NTA)</h2><p>Find notices and official links for national entrance tests including JEE, NEET, and CUET.</p><a href="https://nta.ac.in/" target="_blank" rel="noopener noreferrer">Open official NTA site ↗</a>
+      </article>
+      <article class="update-card" data-category="entrance" data-search="jee main engineering entrance application dates information bulletin syllabus">
+        <span class="update-type">Entrance exam</span><h2>JEE Main</h2><p>Engineering entrance exam information, bulletins, applications, and announcements.</p><a href="https://jeemain.nta.nic.in/" target="_blank" rel="noopener noreferrer">Open official JEE Main site ↗</a>
+      </article>
+      <article class="update-card" data-category="entrance" data-search="neet ug medical entrance application dates syllabus information bulletin">
+        <span class="update-type">Entrance exam</span><h2>NEET (UG)</h2><p>Medical entrance exam notices, information bulletins, and application updates.</p><a href="https://neet.nta.nic.in/" target="_blank" rel="noopener noreferrer">Open official NEET site ↗</a>
+      </article>
+      <article class="update-card" data-category="entrance" data-search="cuet ug university entrance exam nta application syllabus">
+        <span class="update-type">Entrance exam</span><h2>CUET (UG)</h2><p>Common University Entrance Test updates and candidate information.</p><a href="https://cuet.nta.nic.in/" target="_blank" rel="noopener noreferrer">Open official CUET site ↗</a>
+      </article>
+      <article class="update-card" data-category="government" data-search="upsc civil services nda cds examination calendar notification syllabus">
+        <span class="update-type">Government exams</span><h2>UPSC</h2><p>Civil Services, NDA, CDS, exam calendar, notifications, and recruitment information.</p><a href="https://upsc.gov.in/" target="_blank" rel="noopener noreferrer">Open official UPSC site ↗</a>
+      </article>
+      <article class="update-card" data-category="government" data-search="ssc staff selection commission cgl chsl mts gd exam calendar notices">
+        <span class="update-type">Government exams</span><h2>Staff Selection Commission</h2><p>SSC recruitment notices, exam calendars, application information, and results.</p><a href="https://ssc.gov.in/" target="_blank" rel="noopener noreferrer">Open official SSC site ↗</a>
+      </article>
+      <article class="update-card" data-category="government" data-search="ibps banking exams recruitment calendar official notifications">
+        <span class="update-type">Government exams</span><h2>IBPS · Banking</h2><p>Bank recruitment notifications, exam schedules, and candidate updates.</p><a href="https://www.ibps.in/" target="_blank" rel="noopener noreferrer">Open official IBPS site ↗</a>
+      </article>
+      <article class="update-card" data-category="entrance" data-search="gate graduate aptitude test engineering syllabus exam dates official">
+        <span class="update-type">Entrance exam</span><h2>GATE</h2><p>Graduate Aptitude Test in Engineering information and links to the current organizing institute.</p><a href="https://gate2026.iitg.ac.in/" target="_blank" rel="noopener noreferrer">Open GATE 2026 portal ↗</a>
+      </article>
+    </section>
+
+    <p class="updates-foot">Tip: check the notice or “latest announcements” section of each portal. Beware of unofficial pages asking for payments or personal information. Edunime is an independent learning project and is not affiliated with these examination authorities.</p>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="index.html"><span class="brand-mark">E</span><span>edu<span class="brand-accent">nime</span></span></a>
+    <p>Learn with purpose. Grow with confidence.</p>
+    <span>© <span id="year"></span> Edunime</span>
+  </footer>
+  <script>
+    const search = document.getElementById('updateSearch');
+    const category = document.getElementById('updateCategory');
+    const cards = [...document.querySelectorAll('.update-card')];
+    const grid = document.getElementById('updatesGrid');
+    const empty = document.createElement('div');
+    empty.className = 'updates-empty';
+    empty.textContent = 'No portals match that search. Try another keyword or category.';
+    function filterUpdates() {
+      const query = search.value.trim().toLowerCase();
+      const type = category.value;
+      let visible = 0;
+      cards.forEach(card => {
+        const matchesText = (card.dataset.search + ' ' + card.innerText).toLowerCase().includes(query);
+        const matchesType = type === 'all' || card.dataset.category === type;
+        card.hidden = !(matchesText && matchesType);
+        if (!card.hidden) visible++;
+      });
+      if (!visible && !empty.isConnected) grid.appendChild(empty);
+      if (visible && empty.isConnected) empty.remove();
+    }
+    search.addEventListener('input', filterUpdates);
+    category.addEventListener('change', filterUpdates);
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    if (menuToggle && nav) menuToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+  </script>
+</body>
+</html>
